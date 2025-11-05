@@ -1,0 +1,33 @@
+# Arquivos de cache do Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Ambiente virtual
+.venv/
+venv/
+env/
+ENV/
+/venv/
+/env/
+/ENV/
+
+# Diretório de instalação
+.env
+
+# Flask
+instance/
+
+# Cache do cache
+.webassets-cache
+
+# Testes
+.coverage
+htmlcov/
+
+# Build artifacts
+build/
+dist/
+*.egg-info/
+
