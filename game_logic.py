@@ -23,6 +23,20 @@ class TipoMao(Enum):
     
     def __lt__(self, other):
         return self.value[0] < other.value[0]
+    
+    def __le__(self, other):
+        return self.value[0] <= other.value[0]
+
+    def __gt__(self, other):
+        return self.value[0] > other.value[0]
+
+    def __ge__(self, other):
+        return self.value[0] >= other.value[0]
+
+    def __eq__(self, other):
+        if isinstance(other, TipoMao):
+            return self.value[0] == other.value[0]
+        return False
 
 class Carta:
     VALORES = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A']
