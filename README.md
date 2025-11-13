@@ -64,54 +64,6 @@ Ponto de entrada do aplicativo que conecta lógica e interface:
 - Loop principal do jogo
 - Tratamento de exceções e encerramento limpo
 
-## 🐛 Correções Implementadas
-
-### **Problema: Jogo fechava ao chegar no River**
-
-**Causa identificada:**
-- O baralho ficava sem cartas suficientes
-- Não havia verificação de cartas disponíveis antes de distribuir
-- Erro ao tentar acessar cartas inexistentes causava crash
-
-**Soluções aplicadas:**
-
-1. **Verificação de cartas no baralho:**
-```python
-def cartas_restantes(self):
-    return len(self.cartas)
-```
-
-2. **Validação antes de distribuir cartas:**
-```python
-if self.baralho.cartas_restantes() < 5:
-    self.mensagem = "Erro: cartas insuficientes no baralho!"
-    self.fase = "FIM"
-    return
-```
-
-3. **Proteção no cálculo de probabilidades:**
-```python
-if len(baralho_restante) < cartas_faltantes + 2:
-    continue  # Pula simulação se não há cartas suficientes
-```
-
-4. **Retorno seguro em caso de erro:**
-```python
-if not mao_jogador or len(mao_jogador) == 0:
-    return {'vitoria': 0, 'empate': 0, 'derrota': 100}
-```
-
-5. **Tratamento de exceções no main:**
-```python
-try:
-    # Loop principal
-except Exception as e:
-    print(f"Erro durante a execução: {e}")
-    traceback.print_exc()
-finally:
-    pygame.quit()
-```
-
 ## 🚀 Como Executar
 
 ### Pré-requisitos
@@ -122,63 +74,6 @@ pip install pygame
 ### Executar o Jogo
 ```bash
 python main.py
-```
-
-## 🎮 Vantagens da Modularização
-
-### ✅ **Separação de Responsabilidades**
-- Lógica independente da interface
-- Facilita testes unitários
-- Código mais organizado e legível
-
-### ✅ **Manutenibilidade**
-- Alterações na interface não afetam a lógica
-- Fácil adicionar novos recursos
-- Debugging mais simples
-
-### ✅ **Reutilização**
-- Lógica pode ser usada em outras interfaces (CLI, web, etc.)
-- Classes podem ser testadas isoladamente
-- Componentes reutilizáveis
-
-### ✅ **Escalabilidade**
-- Fácil adicionar novos modos de jogo
-- Possibilidade de multiplayer
-- Integração com banco de dados
-
-## 🔧 Exemplos de Uso
-
-### Testar a Lógica Isoladamente
-```python
-from game_logic import GameLogic, Carta, Naipe, AvaliadorMao
-
-# Criar jogo
-game = GameLogic()
-
-# Avaliar uma mão específica
-cartas = [
-    Carta('A', Naipe.ESPADAS),
-    Carta('K', Naipe.ESPADAS),
-    Carta('Q', Naipe.ESPADAS),
-    Carta('J', Naipe.ESPADAS),
-    Carta('10', Naipe.ESPADAS)
-]
-tipo, valores = AvaliadorMao.avaliar_mao(cartas)
-print(f"Tipo: {tipo.value[1]}")  # Royal Flush
-```
-
-### Usar Interface com Lógica Customizada
-```python
-from game_logic import GameLogic
-from game_interface import GameInterface
-
-# Criar jogo com fichas customizadas
-game = GameLogic()
-game.fichas = 5000
-game.aposta_ante = 50
-
-# Iniciar interface
-interface = GameInterface(game)
 ```
 
 ## 📊 Estatísticas e Análise
@@ -211,18 +106,6 @@ O painel de análise estatística exibe:
 - **Resolução**: 1400x900 pixels
 - **Cartas no baralho**: 52 (deck padrão)
 
-## 🔮 Melhorias Futuras Possíveis
-
-- [ ] Salvar/carregar progresso
-- [ ] Múltiplos níveis de ante
-- [ ] Sistema de conquistas
-- [ ] Modo torneio
-- [ ] Multiplayer online
-- [ ] Análise de mãos passadas
-- [ ] Gráficos de performance ao longo do tempo
-- [ ] Sons e efeitos visuais
-- [ ] Customização de baralho e mesa
-
 ## 🆘 Suporte
 
 Se encontrar problemas:
@@ -233,4 +116,4 @@ Se encontrar problemas:
 
 ---
 
-**Desenvolvido com ❤️ usando Python e Pygame**
+**Desenvolvido usando Python e Pygame**
